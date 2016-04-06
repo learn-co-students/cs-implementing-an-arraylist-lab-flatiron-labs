@@ -127,8 +127,15 @@ public class MyArrayList<E> implements List<E> {
 
 	@Override
 	public int indexOf(Object target) {
-		// TODO: fill in this method
-		return 0;
+    int index = -1;
+
+    for(int i = 0; i<array.length; i++) {
+      if(array[i] == target) {
+        index = i;
+      }
+    }
+
+    return index;
 	}
 
 	/** Checks whether an element of the array is the target.
@@ -221,8 +228,9 @@ public class MyArrayList<E> implements List<E> {
 		if (index < 0 || index >= size) {
 			throw new IndexOutOfBoundsException();
 		}
+    E old = array[index];
     array[index] = element;
-		return null;
+		return old;
 	}
 
 	@Override
