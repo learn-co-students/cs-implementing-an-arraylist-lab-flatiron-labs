@@ -207,6 +207,10 @@ public class MyArrayList<E> implements List<E> {
 	public E remove(int index) {
     E old = array[index];
     array[index] = null;
+    for(int i = index; i <= size; i++) {
+      array[index] = array[index+1];
+    }
+    size--;
 		return old;
 	}
 
