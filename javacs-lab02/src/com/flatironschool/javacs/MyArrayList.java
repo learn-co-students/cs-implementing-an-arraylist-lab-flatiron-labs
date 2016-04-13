@@ -130,7 +130,7 @@ public class MyArrayList<E> implements List<E> {
     int index = -1;
 
     for(int i = 0; i<array.length; i++) {
-      if(array[i] == target) {
+      if(target.equals(array[i])) {
         index = i;
       }
     }
@@ -205,8 +205,9 @@ public class MyArrayList<E> implements List<E> {
 
 	@Override
 	public E remove(int index) {
-		// TODO: fill in this method.
-		return null;
+    E old = array[index];
+    array[index] = null;
+		return old;
 	}
 
 	@Override

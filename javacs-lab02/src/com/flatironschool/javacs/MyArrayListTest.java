@@ -188,10 +188,17 @@ public class MyArrayListTest {
 	@Test
 	public void testRemoveObject() {
 		boolean flag = mal.remove(new Integer(2));
+
+    if(flag) {
+		  System.out.println("TRUE");
+    } else {
+		  System.out.println("FALSE");
+    }
+
+		System.out.println(Arrays.toString(mal.toArray()));
 		assertThat(flag, equalTo(true));
 		assertThat(mal.size(), is(2));
 		assertThat(mal.get(1), is(new Integer(3)));
-		//System.out.println(Arrays.toString(mal.toArray()));
 
 		flag = mal.remove(new Integer(1));
 		assertThat(flag, equalTo(true));
