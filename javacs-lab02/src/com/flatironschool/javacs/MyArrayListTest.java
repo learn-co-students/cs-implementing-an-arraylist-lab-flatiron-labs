@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.flatironschool.javacs;
 
@@ -35,7 +35,7 @@ public class MyArrayListTest {
 		list.add(1);
 		list.add(2);
 		list.add(3);
-		
+
 		mal = new MyArrayList<Integer>();
 		mal.addAll(list);
 	}
@@ -66,10 +66,10 @@ public class MyArrayListTest {
 	@Test
 	public void testAddIntT() {
 		mal.add(1, 5);
-		//System.out.println(Arrays.toString(mal.toArray()));
+		System.out.println(Arrays.toString(mal.toArray()));
 		assertThat(mal.get(1), is(new Integer(5)));
 		assertThat(mal.size(), is(4));
-		
+
 		try {
 		    mal.set(-1, 0);
 		    fail();
@@ -79,13 +79,15 @@ public class MyArrayListTest {
 		    mal.set(4, 0);
 		    fail();
 		} catch (IndexOutOfBoundsException e) {} // good
-		
+
 		mal.add(0, 6);
-		//System.out.println(Arrays.toString(mal.toArray()));
+    System.out.println("mal.add(0, 6);");
+		System.out.println(Arrays.toString(mal.toArray()));
 		assertThat(mal.get(0), is(6));
 
 		mal.add(5, 7);
-		//System.out.println(Arrays.toString(mal.toArray()));
+    System.out.println("mal.add(5, 7);");
+		System.out.println(Arrays.toString(mal.toArray()));
 		assertThat(mal.get(5), is(new Integer(7)));
 	}
 
@@ -186,23 +188,30 @@ public class MyArrayListTest {
 	@Test
 	public void testRemoveObject() {
 		boolean flag = mal.remove(new Integer(2));
+
+    if(flag) {
+		  System.out.println("TRUE");
+    } else {
+		  System.out.println("FALSE");
+    }
+
+		System.out.println(Arrays.toString(mal.toArray()));
 		assertThat(flag, equalTo(true));
 		assertThat(mal.size(), is(2));
 		assertThat(mal.get(1), is(new Integer(3)));
-		//System.out.println(Arrays.toString(mal.toArray()));
 
 		flag = mal.remove(new Integer(1));
 		assertThat(flag, equalTo(true));
 		assertThat(mal.size(), is(1));
 		assertThat(mal.get(0), is(new Integer(3)));
 		//System.out.println(Arrays.toString(mal.toArray()));
-		
+
 		flag = mal.remove(new Integer(5));
 		assertThat(flag, equalTo(false));
 		assertThat(mal.size(), is(1));
 		assertThat(mal.get(0), is(new Integer(3)));
 		//System.out.println(Arrays.toString(mal.toArray()));
-		
+
 		flag = mal.remove(new Integer(3));
 		assertThat(flag, equalTo(true));
 		assertThat(mal.size(), is(0));

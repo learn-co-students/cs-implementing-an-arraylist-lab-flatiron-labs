@@ -59,10 +59,26 @@ public class MyArrayList<E> implements List<E> {
 
 	@Override
 	public void add(int index, E element) {
+		if (size >= array.length) {
+			// make a bigger array and copy over the elements
+			E[] bigger = (E[]) new Object[array.length * 2];
+			System.arraycopy(array, 0, bigger, 0, array.length);
+			array = bigger;
+		}
+
 		if (index < 0 || index > size) {
 			throw new IndexOutOfBoundsException();
 		}
-		// TODO: fill in the rest of this method
+
+    E temp = element;
+
+    for(int curr = index; curr <= size; curr++) {
+      array[curr] = temp;
+      if(curr < size) {
+        temp = array[curr+1];
+      }
+    }
+    size++;
 	}
 
 	@Override
@@ -111,8 +127,24 @@ public class MyArrayList<E> implements List<E> {
 
 	@Override
 	public int indexOf(Object target) {
-		// TODO: fill in this method
-		return 0;
+    int index = -1;
+
+    for(int i = 0; i<size; i++) {
+      if (target == null) {
+        if(array[i] == null) {
+          index = i;
+          break;
+        }
+      }
+      else {
+        if (target.equals(array[i])) {
+          index = i;
+          break;
+        }
+      }
+    }
+
+    return index;
 	}
 
 	/** Checks whether an element of the array is the target.
@@ -182,8 +214,13 @@ public class MyArrayList<E> implements List<E> {
 
 	@Override
 	public E remove(int index) {
-		// TODO: fill in this method.
-		return null;
+    E old = array[index];
+    array[index] = null;
+    for(int i = index; i <= size; i++) {
+      array[index] = array[index+1];
+    }
+    size--;
+		return old;
 	}
 
 	@Override
@@ -192,6 +229,7 @@ public class MyArrayList<E> implements List<E> {
 		for (Object obj: collection) {
 			flag &= remove(obj);
 		}
+    size = 0;
 		return flag;
 	}
 
@@ -202,8 +240,12 @@ public class MyArrayList<E> implements List<E> {
 
 	@Override
 	public E set(int index, E element) {
-		// TODO: fill in this method.
-		return null;
+		if (index < 0 || index >= size) {
+			throw new IndexOutOfBoundsException();
+		}
+    E old = array[index];
+    array[index] = element;
+		return old;
 	}
 
 	@Override
